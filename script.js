@@ -88,6 +88,19 @@ function getItemKey(item) {
   return `${item.title}::${item.category}`;
 }
 
+function parsePriceValue(price) {
+  const numeric = Number(String(price ?? "").replace(/[^0-9.]/g, ""));
+  return Number.isFinite(numeric) ? numeric : 0;
+}
+
+function formatCurrency(amount) {
+  return `₹${amount.toLocaleString("en-IN")}`;
+}
+
+function getCartTotal() {
+  return cartItems.reduce((sum, item) => sum + parsePriceValue(item.price), 0);
+}
+
 function updateThemePreviewCount() {
   const preview = document.querySelector(".tools-count");
   if (preview) {
@@ -155,6 +168,13 @@ function renderCollectionsPanel() {
           <div class="collections-list wishlist-list"></div>
         </div>
       </div>
+      <div class="collections-summary">
+        <div>
+          <span>Cart total</span>
+          <strong class="cart-total">₹0</strong>
+        </div>
+        <p class="saved-empty">Wishlist items are saved for later and do not add to the bill.</p>
+      </div>
     `;
     document.body.appendChild(panel);
     panel.querySelector(".collections-close").addEventListener("click", () => {
@@ -164,6 +184,7 @@ function renderCollectionsPanel() {
 
   const cartList = panel.querySelector(".cart-list");
   const wishlistList = panel.querySelector(".wishlist-list");
+  const cartTotal = panel.querySelector(".cart-total");
 
   cartList.innerHTML = cartItems.length
     ? cartItems.map((item) => `<div class="saved-row"><span>${item.title}</span><button type="button" data-remove="cart" data-key="${item.key}">Remove</button></div>`).join("")
@@ -172,6 +193,10 @@ function renderCollectionsPanel() {
   wishlistList.innerHTML = wishlistItems.length
     ? wishlistItems.map((item) => `<div class="saved-row"><span>${item.title}</span><button type="button" data-remove="wishlist" data-key="${item.key}">Remove</button></div>`).join("")
     : '<p class="saved-empty">No saved items yet.</p>';
+
+  if (cartTotal) {
+    cartTotal.textContent = formatCurrency(getCartTotal());
+  }
 
   panel.querySelectorAll("button[data-remove]").forEach((button) => {
     button.addEventListener("click", () => removeFromCollection(button.dataset.remove, button.dataset.key));

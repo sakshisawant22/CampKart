@@ -567,8 +567,8 @@ button {
 }
 
 .newsletter-form {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  align-items: stretch;
   gap: 0;
   margin-top: 6px;
   padding: 4px;
@@ -579,6 +579,7 @@ button {
 }
 
 .newsletter-form input {
+  flex: 1;
   min-height: 48px;
   padding: 0 16px;
   border: 0;
@@ -588,12 +589,17 @@ button {
 }
 
 .newsletter-form button {
-  width: 48px;
+  flex: 0 0 48px;
+  min-width: 48px;
   height: 48px;
+  display: grid;
+  place-items: center;
+  border: 0;
   border-radius: 50%;
   background: #111827;
   color: #ffffff;
   font-size: 1.1rem;
+  line-height: 1;
 }
 
 .footer-bottom {
@@ -777,11 +783,12 @@ button {
   }
 
   .newsletter-form {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 
   .newsletter-form button {
     width: 100%;
+    flex: none;
     border-radius: 14px;
   }
 }

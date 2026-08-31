@@ -1,13 +1,13 @@
 :root {
-  --bg: #08111f;
-  --panel: rgba(10, 17, 31, 0.78);
-  --panel-strong: rgba(15, 23, 42, 0.94);
-  --border: rgba(255, 255, 255, 0.08);
-  --text: #ecf3ff;
-  --muted: #9fb0ca;
-  --accent: #6ee7b7;
-  --accent-2: #f7c548;
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  --bg: #f7fbff;
+  --panel: rgba(255, 255, 255, 0.82);
+  --panel-strong: rgba(255, 255, 255, 0.94);
+  --border: rgba(15, 23, 42, 0.08);
+  --text: #132033;
+  --muted: #5f7088;
+  --accent: #27c4a6;
+  --accent-2: #ffb74d;
+  --shadow: 0 24px 70px rgba(34, 63, 122, 0.14);
 }
 
 * {
@@ -24,9 +24,9 @@ body {
   font-family: "Inter", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(110, 231, 183, 0.18), transparent 34%),
-    radial-gradient(circle at top right, rgba(247, 197, 72, 0.18), transparent 26%),
-    linear-gradient(180deg, #050a13 0%, #0b1324 100%);
+    radial-gradient(circle at top left, rgba(39, 196, 166, 0.16), transparent 30%),
+    radial-gradient(circle at top right, rgba(255, 183, 77, 0.18), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
   overflow-x: hidden;
 }
 
@@ -86,8 +86,8 @@ button {
   gap: 8px;
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(110, 231, 183, 0.12);
-  color: #b8ffe1;
+  background: rgba(39, 196, 166, 0.12);
+  color: #126d5d;
   font-size: 0.84rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -111,14 +111,14 @@ button {
 }
 
 .primary {
-  background: linear-gradient(135deg, var(--accent), #90f7d2);
-  color: #04221a;
+  background: linear-gradient(135deg, #27c4a6, #7be3ca);
+  color: #ffffff;
 }
 
 .secondary {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(39, 196, 166, 0.06);
   color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(39, 196, 166, 0.14);
 }
 
 .small {
@@ -144,8 +144,8 @@ button {
 .stats div {
   padding: 16px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .stats strong,
@@ -172,7 +172,7 @@ button {
   padding: 22px;
   border-radius: 24px;
   background: var(--panel-strong);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -182,7 +182,7 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #d6e3f7;
+  color: #24364e;
   font-weight: 600;
 }
 
@@ -191,7 +191,7 @@ button {
   height: 10px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 18px rgba(110, 231, 183, 0.8);
+  box-shadow: 0 0 18px rgba(39, 196, 166, 0.35);
 }
 
 .listing-card {
@@ -201,7 +201,7 @@ button {
   align-items: center;
   padding: 18px;
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(39, 196, 166, 0.05);
 }
 
 .listing-icon {
@@ -211,7 +211,7 @@ button {
   place-items: center;
   font-size: 1.8rem;
   border-radius: 18px;
-  background: rgba(247, 197, 72, 0.16);
+  background: rgba(255, 183, 77, 0.22);
 }
 
 .listing-card h2,
@@ -224,7 +224,7 @@ button {
 
 .price {
   font-size: 1.4rem;
-  color: #dffef2;
+  color: #0f7a67;
 }
 
 .flow {
@@ -239,7 +239,7 @@ button {
   align-items: start;
   padding: 14px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .flow-step span {
@@ -248,13 +248,13 @@ button {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(39, 196, 166, 0.14);
   font-weight: 700;
 }
 
 .flow-step.active {
-  border: 1px solid rgba(110, 231, 183, 0.22);
-  background: rgba(110, 231, 183, 0.06);
+  border: 1px solid rgba(39, 196, 166, 0.22);
+  background: rgba(39, 196, 166, 0.08);
 }
 
 .categories-section,
@@ -294,10 +294,10 @@ button {
   gap: 10px;
   padding: 16px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.9);
   color: var(--text);
   text-align: left;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .emoji {
@@ -306,7 +306,7 @@ button {
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: rgba(110, 231, 183, 0.12);
+  background: linear-gradient(135deg, rgba(39, 196, 166, 0.16), rgba(255, 183, 77, 0.16));
   font-size: 1.15rem;
 }
 
@@ -333,8 +333,8 @@ button {
   width: 100%;
   padding: 14px 16px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--text);
   outline: none;
 }
@@ -348,15 +348,15 @@ button {
 .mode-btn {
   min-height: 46px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   font-weight: 700;
 }
 
 .mode-btn.active {
-  background: rgba(110, 231, 183, 0.16);
-  border-color: rgba(110, 231, 183, 0.28);
+  background: rgba(39, 196, 166, 0.14);
+  border-color: rgba(39, 196, 166, 0.28);
 }
 
 .submit-btn {
@@ -371,8 +371,8 @@ button {
 .feed-item {
   padding: 18px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .feed-top {
@@ -405,7 +405,7 @@ button {
   left: -100px;
   width: 280px;
   height: 280px;
-  background: rgba(110, 231, 183, 0.14);
+  background: rgba(39, 196, 166, 0.16);
 }
 
 .orb-two {
@@ -413,7 +413,7 @@ button {
   top: 240px;
   width: 300px;
   height: 300px;
-  background: rgba(247, 197, 72, 0.12);
+  background: rgba(255, 183, 77, 0.16);
 }
 
 @media (max-width: 960px) {

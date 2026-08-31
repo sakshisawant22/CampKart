@@ -19,6 +19,21 @@ const listings = [
   { title: "Noise Cancelling Headphones", category: "Headphones", price: "₹1,900", mode: "Sell", meta: "Good battery life · Hostel pickup" },
 ];
 
+const categoryPages = {
+  "Books & study material": "books-study-material.html",
+  "Laptops/accessories": "laptops-accessories.html",
+  Monitors: "monitors.html",
+  Headphones: "headphones.html",
+  Bicycles: "bicycles.html",
+  Furniture: "furniture.html",
+  Clothes: "clothes.html",
+  "Gaming equipment": "gaming-equipment.html",
+  Electronics: "electronics.html",
+  "Hostel essentials": "hostel-essentials.html",
+  Calculators: "calculators.html",
+  Bags: "bags.html",
+};
+
 const categoryGrid = document.getElementById("categoryGrid");
 const categoryTemplate = document.getElementById("categoryTemplate");
 const categorySelect = document.getElementById("categorySelect");
@@ -47,6 +62,9 @@ function renderCategories() {
     const chip = categoryTemplate.content.cloneNode(true);
     chip.querySelector(".emoji").textContent = emoji;
     chip.querySelector(".label").textContent = label;
+    chip.querySelector(".category-chip").addEventListener("click", () => {
+      window.location.href = categoryPages[label];
+    });
     categoryGrid.appendChild(chip);
 
     const option = document.createElement("option");

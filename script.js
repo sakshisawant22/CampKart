@@ -26,8 +26,21 @@ const feed = document.getElementById("feed");
 const feedTemplate = document.getElementById("feedTemplate");
 const listingForm = document.getElementById("listingForm");
 const modeButtons = document.querySelectorAll(".mode-btn");
+const themeButtons = document.querySelectorAll(".theme-chip");
 
 let selectedMode = "sell";
+
+function setTheme(theme) {
+  const availableThemes = ["mint", "orange", "pink", "yellow", "royal"];
+  const nextTheme = availableThemes.includes(theme) ? theme : "mint";
+
+  document.body.dataset.theme = nextTheme;
+  themeButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.theme === nextTheme);
+  });
+
+  localStorage.setItem("campkart-theme", nextTheme);
+}
 
 function renderCategories() {
   categories.forEach(([emoji, label]) => {
@@ -76,6 +89,10 @@ document.getElementById("viewDemoBtn").addEventListener("click", () => {
   document.querySelector(".demo-panel").scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
+themeButtons.forEach((button) => {
+  button.addEventListener("click", () => setTheme(button.dataset.theme));
+});
+
 modeButtons.forEach((button) => {
   button.addEventListener("click", () => setMode(button.dataset.mode));
 });
@@ -105,3 +122,4 @@ listingForm.addEventListener("submit", (event) => {
 renderCategories();
 renderFeed();
 setMode("sell");
+setTheme(localStorage.getItem("campkart-theme") || "mint");

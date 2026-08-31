@@ -70,6 +70,20 @@ body[data-theme="royal"] {
   --theme-chip-bg: rgba(79, 124, 255, 0.12);
 }
 
+body[data-theme="bw"] {
+  --accent: #111111;
+  --accent-soft: #4a4a4a;
+  --accent-2: #d9d9d9;
+  --accent-2-soft: #f0f0f0;
+  --accent-rgb: 17, 17, 17;
+  --accent-2-rgb: 217, 217, 217;
+  --theme-glow-a: rgba(17, 17, 17, 0.12);
+  --theme-glow-b: rgba(217, 217, 217, 0.3);
+  --theme-chip: #111111;
+  --theme-chip-bg: rgba(17, 17, 17, 0.08);
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -292,6 +306,38 @@ button {
 .avatar-c { bottom: 46px; left: 96px; background: linear-gradient(135deg, #f7c548, #f59e0b); }
 .avatar-d { bottom: 28px; right: 110px; background: linear-gradient(135deg, #ff8d8d, #f45d7a); }
 .avatar-e { top: 142px; left: 32px; background: linear-gradient(135deg, #b39dff, #7c6df6); }
+
+body[data-theme="bw"] .avatar-a,
+body[data-theme="bw"] .avatar-b,
+body[data-theme="bw"] .avatar-c,
+body[data-theme="bw"] .avatar-d,
+body[data-theme="bw"] .avatar-e {
+  background: linear-gradient(135deg, #111111, #5b5b5b);
+}
+
+body[data-theme="bw"] .category-chip,
+body[data-theme="bw"] .mode-btn,
+body[data-theme="bw"] .feed-item,
+body[data-theme="bw"] .listing-card,
+body[data-theme="bw"] .stats div,
+body[data-theme="bw"] .demo-panel,
+body[data-theme="bw"] .feature-showcase,
+body[data-theme="bw"] .footer,
+body[data-theme="bw"] .newsletter-panel {
+  border-color: rgba(17, 17, 17, 0.14);
+}
+
+body[data-theme="bw"] .primary,
+body[data-theme="bw"] .newsletter-submit {
+  background: linear-gradient(135deg, #111111, #4a4a4a);
+}
+
+body[data-theme="bw"] .secondary,
+body[data-theme="bw"] .pink-cta {
+  background: rgba(17, 17, 17, 0.04);
+  color: #111111;
+  border-color: rgba(17, 17, 17, 0.16);
+}
 
 .cta-row {
   display: flex;

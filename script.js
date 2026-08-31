@@ -31,7 +31,7 @@ const themeButtons = document.querySelectorAll(".theme-chip");
 let selectedMode = "sell";
 
 function setTheme(theme) {
-  const availableThemes = ["mint", "orange", "pink", "yellow", "royal"];
+  const availableThemes = ["mint", "orange", "pink", "yellow", "royal", "bw"];
   const nextTheme = availableThemes.includes(theme) ? theme : "mint";
 
   document.body.dataset.theme = nextTheme;

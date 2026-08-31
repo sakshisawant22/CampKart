@@ -44,6 +44,219 @@ const modeButtons = document.querySelectorAll(".mode-btn");
 const themeButtons = document.querySelectorAll(".theme-chip");
 
 let selectedMode = "sell";
+let cartItems = [];
+let wishlistItems = [];
+
+const themeOptions = [
+  { theme: "pink", label: "Pink" },
+  { theme: "orange", label: "Orange" },
+  { theme: "bw", label: "Black & White" },
+  { theme: "mint", label: "Mint" },
+  { theme: "yellow", label: "Yellow" },
+  { theme: "royal", label: "Royal Blue" },
+];
+
+function loadCollection(key) {
+  try {
+    return JSON.parse(localStorage.getItem(key) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function persistCollection(key, items) {
+  localStorage.setItem(key, JSON.stringify(items));
+}
+
+function getItemKey(item) {
+  return `${item.title}::${item.category}`;
+}
+
+function updateThemePreviewCount() {
+  const preview = document.querySelector(".tools-count");
+  if (preview) {
+    preview.textContent = `${cartItems.length} in cart · ${wishlistItems.length} saved`;
+  }
+}
+
+function addToCollection(type, item) {
+  const collection = type === "cart" ? cartItems : wishlistItems;
+  const exists = collection.some((entry) => entry.key === getItemKey(item));
+
+  if (exists) {
+    return;
+  }
+
+  collection.unshift({
+    key: getItemKey(item),
+    title: item.title,
+    category: item.category,
+    price: item.price,
+  });
+
+  persistCollection(type === "cart" ? "campkart-cart" : "campkart-wishlist", collection);
+  renderCollectionsPanel();
+  updateThemePreviewCount();
+}
+
+function removeFromCollection(type, key) {
+  const collection = type === "cart" ? cartItems : wishlistItems;
+  const nextItems = collection.filter((entry) => entry.key !== key);
+
+  if (type === "cart") {
+    cartItems = nextItems;
+    persistCollection("campkart-cart", cartItems);
+  } else {
+    wishlistItems = nextItems;
+    persistCollection("campkart-wishlist", wishlistItems);
+  }
+
+  renderCollectionsPanel();
+  updateThemePreviewCount();
+}
+
+function renderCollectionsPanel() {
+  let panel = document.querySelector(".collections-drawer");
+
+  if (!panel) {
+    panel = document.createElement("section");
+    panel.className = "collections-drawer card";
+    panel.innerHTML = `
+      <div class="collections-top">
+        <div>
+          <div class="eyebrow light">Cart & wishlist</div>
+          <h2>Your saved items</h2>
+        </div>
+        <button type="button" class="collections-close" aria-label="Close saved items">×</button>
+      </div>
+      <div class="collections-grid">
+        <div>
+          <h3>Cart</h3>
+          <div class="collections-list cart-list"></div>
+        </div>
+        <div>
+          <h3>Wishlist</h3>
+          <div class="collections-list wishlist-list"></div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(panel);
+    panel.querySelector(".collections-close").addEventListener("click", () => {
+      panel.classList.remove("open");
+    });
+  }
+
+  const cartList = panel.querySelector(".cart-list");
+  const wishlistList = panel.querySelector(".wishlist-list");
+
+  cartList.innerHTML = cartItems.length
+    ? cartItems.map((item) => `<div class="saved-row"><span>${item.title}</span><button type="button" data-remove="cart" data-key="${item.key}">Remove</button></div>`).join("")
+    : '<p class="saved-empty">No items in cart yet.</p>';
+
+  wishlistList.innerHTML = wishlistItems.length
+    ? wishlistItems.map((item) => `<div class="saved-row"><span>${item.title}</span><button type="button" data-remove="wishlist" data-key="${item.key}">Remove</button></div>`).join("")
+    : '<p class="saved-empty">No saved items yet.</p>';
+
+  panel.querySelectorAll("button[data-remove]").forEach((button) => {
+    button.addEventListener("click", () => removeFromCollection(button.dataset.remove, button.dataset.key));
+  });
+
+  const trigger = document.querySelector(".saved-trigger");
+  if (trigger) {
+    trigger.querySelector(".cart-count").textContent = cartItems.length;
+    trigger.querySelector(".wishlist-count").textContent = wishlistItems.length;
+  }
+}
+
+function openCollectionsPanel() {
+  const panel = document.querySelector(".collections-drawer");
+  if (panel) {
+    panel.classList.add("open");
+  }
+}
+
+function mountThemeToolsSection() {
+  if (document.querySelector(".theme-tools-section") || document.querySelector(".theme-switcher")) {
+    return;
+  }
+
+  const main = document.querySelector("main.shell");
+  if (!main) {
+    return;
+  }
+
+  const tools = document.createElement("section");
+  tools.className = "theme-tools-section card";
+  tools.innerHTML = `
+    <div>
+      <div class="eyebrow light">Theme section</div>
+      <h2>Pick a look for this page</h2>
+      <p class="tools-count">${cartItems.length} in cart · ${wishlistItems.length} saved</p>
+    </div>
+    <div class="theme-switcher theme-switcher-compact" aria-label="Color themes"></div>
+    <div class="saved-trigger" role="button" tabindex="0" aria-label="Open cart and wishlist">
+      <span>Cart <strong class="cart-count">${cartItems.length}</strong></span>
+      <span>Wishlist <strong class="wishlist-count">${wishlistItems.length}</strong></span>
+    </div>
+  `;
+
+  const themeRow = tools.querySelector(".theme-switcher-compact");
+  themeOptions.forEach(({ theme, label }) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `theme-chip${document.body.dataset.theme === theme ? " active" : ""}`;
+    button.dataset.theme = theme;
+    button.innerHTML = `<span class="theme-dot"></span>${label}`;
+    button.addEventListener("click", () => setTheme(theme));
+    themeRow.appendChild(button);
+  });
+
+  tools.querySelector(".saved-trigger").addEventListener("click", openCollectionsPanel);
+  tools.querySelector(".saved-trigger").addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openCollectionsPanel();
+    }
+  });
+
+  main.prepend(tools);
+}
+
+function mountSavedDock() {
+  if (document.querySelector(".saved-dock")) {
+    return;
+  }
+
+  const dock = document.createElement("button");
+  dock.type = "button";
+  dock.className = "saved-dock";
+  dock.innerHTML = `
+    <span>Cart <strong class="cart-count">${cartItems.length}</strong></span>
+    <span>Wishlist <strong class="wishlist-count">${wishlistItems.length}</strong></span>
+  `;
+  dock.addEventListener("click", openCollectionsPanel);
+  document.body.appendChild(dock);
+}
+
+function buildItemActions(itemData) {
+  const actions = document.createElement("div");
+  actions.className = "item-actions";
+
+  const cartButton = document.createElement("button");
+  cartButton.type = "button";
+  cartButton.className = "secondary small";
+  cartButton.textContent = "Add to cart";
+  cartButton.addEventListener("click", () => addToCollection("cart", itemData));
+
+  const wishlistButton = document.createElement("button");
+  wishlistButton.type = "button";
+  wishlistButton.className = "secondary small";
+  wishlistButton.textContent = "Wishlist";
+  wishlistButton.addEventListener("click", () => addToCollection("wishlist", itemData));
+
+  actions.append(cartButton, wishlistButton);
+  return actions;
+}
 
 function setTheme(theme) {
   const availableThemes = ["mint", "orange", "pink", "yellow", "royal", "bw"];
@@ -87,6 +300,8 @@ function renderFeed() {
     item.querySelector(".contact-btn").addEventListener("click", () => {
       alert(`Contact request sent for ${listing.title}.`);
     });
+
+    item.querySelector(".feed-item").appendChild(buildItemActions(listing));
 
     feed.appendChild(item);
   });
@@ -137,7 +352,39 @@ listingForm.addEventListener("submit", (event) => {
   setMode("sell");
 });
 
+function enhanceStaticCategoryPages() {
+  const categoryCards = document.querySelectorAll(".category-page .item-card");
+  if (!categoryCards.length) {
+    return;
+  }
+
+  const pageTitle = document.querySelector(".category-hero h1")?.textContent || "";
+
+  categoryCards.forEach((card, index) => {
+    if (card.querySelector(".item-actions")) {
+      return;
+    }
+
+    const heading = card.querySelector("h3")?.textContent || `Item ${index + 1}`;
+    const price = card.querySelector(".item-price")?.textContent || "₹0";
+    const itemData = {
+      title: heading,
+      category: pageTitle,
+      price,
+    };
+
+    card.appendChild(buildItemActions(itemData));
+  });
+}
+
+cartItems = loadCollection("campkart-cart");
+wishlistItems = loadCollection("campkart-wishlist");
+
 renderCategories();
 renderFeed();
 setMode("sell");
 setTheme(localStorage.getItem("campkart-theme") || "pink");
+mountThemeToolsSection();
+mountSavedDock();
+enhanceStaticCategoryPages();
+renderCollectionsPanel();

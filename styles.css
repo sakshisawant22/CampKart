@@ -286,6 +286,10 @@ button {
   margin-top: 18px;
 }
 
+.theme-switcher-compact {
+  margin-top: 0;
+}
+
 .theme-chip {
   display: inline-flex;
   align-items: center;
@@ -316,6 +320,183 @@ button {
 
 .feature-btn {
   margin-top: 22px;
+}
+
+.theme-tools-section {
+  margin-bottom: 22px;
+  padding: 22px 24px;
+  display: grid;
+  gap: 14px;
+}
+
+.theme-tools-section h2 {
+  margin: 10px 0 8px;
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.theme-tools-section p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.saved-dock {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 18px 48px rgba(34, 63, 122, 0.16);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.saved-dock strong,
+.saved-trigger strong {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--theme-chip-bg);
+  color: var(--theme-chip);
+  font-size: 0.82rem;
+}
+
+.saved-dock span,
+.saved-trigger span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.saved-trigger {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(var(--accent-rgb) / 0.08);
+  border: 1px solid rgba(var(--accent-rgb) / 0.18);
+  color: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.collections-drawer {
+  position: fixed;
+  right: 18px;
+  bottom: 72px;
+  width: min(620px, calc(100vw - 24px));
+  max-height: min(72vh, 720px);
+  overflow: auto;
+  z-index: 45;
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.collections-drawer.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.collections-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.collections-top h2,
+.collections-list h3 {
+  margin: 8px 0 0;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.collections-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.08);
+  color: var(--text);
+  font-size: 1.2rem;
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.collections-grid > div {
+  display: grid;
+  gap: 10px;
+}
+
+.collections-list {
+  display: grid;
+  gap: 10px;
+}
+
+.saved-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.saved-row span {
+  font-weight: 600;
+}
+
+.saved-row button {
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb) / 0.12);
+  color: var(--theme-chip);
+  border: 1px solid rgba(var(--accent-rgb) / 0.2);
+}
+
+.saved-empty {
+  margin: 0;
+  color: var(--muted);
+}
+
+.item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.item-card .item-actions {
+  padding-top: 6px;
+  border-top: 1px dashed rgba(15, 23, 42, 0.08);
+}
+
+.feed-item .item-actions {
+  justify-content: flex-start;
+}
+
+.item-actions .small {
+  border-radius: 999px;
 }
 
 .orbit-wrap {
@@ -1011,6 +1192,10 @@ body[data-theme="bw"] .pink-cta {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .collections-grid {
+    grid-template-columns: 1fr;
+  }
+
   .orbit-wrap {
     min-height: 280px;
   }
@@ -1067,6 +1252,12 @@ body[data-theme="bw"] .pink-cta {
     justify-content: center;
   }
 
+  .saved-dock {
+    left: 18px;
+    right: 18px;
+    justify-content: center;
+  }
+
   .orbit-wrap {
     min-height: 240px;
   }
@@ -1110,5 +1301,12 @@ body[data-theme="bw"] .pink-cta {
     width: 100%;
     flex: none;
     border-radius: 14px;
+  }
+
+  .collections-drawer {
+    left: 12px;
+    right: 12px;
+    bottom: 78px;
+    width: auto;
   }
 }

@@ -122,4 +122,4 @@ listingForm.addEventListener("submit", (event) => {
 renderCategories();
 renderFeed();
 setMode("sell");
-setTheme(localStorage.getItem("campkart-theme") || "mint");
+setTheme(localStorage.getItem("campkart-theme") || "pink");

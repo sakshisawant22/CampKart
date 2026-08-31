@@ -320,6 +320,12 @@ button {
   border: 1px solid rgb(var(--accent-rgb) / 0.14);
 }
 
+.pink-cta {
+  background: linear-gradient(135deg, rgba(255, 95, 163, 0.12), rgba(255, 182, 211, 0.28));
+  color: #a71f63;
+  border-color: rgb(var(--accent-rgb) / 0.22);
+}
+
 .small {
   min-height: 40px;
   padding: 0 14px;

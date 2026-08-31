@@ -945,17 +945,33 @@ body[data-theme="bw"] .pink-cta {
   gap: 12px;
 }
 
-.sublist-chip {
+.sublist-card {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(var(--accent-rgb) / 0.12);
+  box-shadow: 0 10px 24px rgba(34, 63, 122, 0.06);
+}
+
+.sublist-card-top {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 16px;
-  border-radius: 18px;
-  background: rgba(var(--accent-rgb) / 0.06);
-  border: 1px solid rgba(var(--accent-rgb) / 0.14);
-  color: var(--text);
-  text-align: left;
-  font-weight: 700;
+}
+
+.sublist-card h3 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.sublist-card p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.92rem;
 }
 
 .sublist-bullet {
@@ -967,7 +983,16 @@ body[data-theme="bw"] .pink-cta {
   flex: 0 0 auto;
 }
 
-.sublist-chip:hover {
+.sublist-card .item-actions {
+  margin-top: 0;
+}
+
+.sublist-card .small {
+  flex: 1;
+  justify-content: center;
+}
+
+.sublist-card:hover {
   transform: translateY(-1px);
 }
 

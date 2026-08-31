@@ -42,6 +42,7 @@ const feedTemplate = document.getElementById("feedTemplate");
 const listingForm = document.getElementById("listingForm");
 const modeButtons = document.querySelectorAll(".mode-btn");
 const themeButtons = document.querySelectorAll(".theme-chip");
+const isHomePage = Boolean(categoryGrid && categoryTemplate && categorySelect && feed && feedTemplate && listingForm);
 
 let selectedMode = "sell";
 let cartItems = [];
@@ -57,18 +58,18 @@ const themeOptions = [
 ];
 
 const sublistData = {
-  "Books & study material": ["Textbooks", "Notes & guides", "Previous papers", "Lab manuals"],
-  "Laptops/accessories": ["Laptop bags", "Chargers", "Mouse & keyboards", "Stands & sleeves"],
-  Monitors: ["Second screens", "HDMI cables", "Monitor stands", "Power adapters"],
-  Headphones: ["Bluetooth headsets", "Wired headphones", "Earbuds", "Mic headsets"],
-  Bicycles: ["Campus cycles", "Locks", "Pumps", "Baskets"],
-  Furniture: ["Study tables", "Chairs", "Shelves", "Desk lamps"],
-  Clothes: ["Hoodies", "Jeans", "Shirts", "Jackets"],
-  "Gaming equipment": ["Controllers", "Keyboards", "Mousepads", "Headsets"],
-  Electronics: ["Power banks", "Routers", "Speakers", "Extension boards"],
-  "Hostel essentials": ["Buckets", "Kettles", "Storage boxes", "Hangers"],
-  Calculators: ["Scientific", "Graphing", "Basic", "Calculator pouches"],
-  Bags: ["Backpacks", "Laptop bags", "Totes", "Messenger bags"],
+  "Books & study material": ["DSA", "OOPs", "CN", "DBMS", "OS", "Python"],
+  "Laptops/accessories": ["Dell", "HP", "Lenovo", "ASUS RTX", "Acer", "MacBook"],
+  Monitors: ["24 inch", "27 inch", "HDMI monitor", "IPS display", "Full HD", "Monitor stand"],
+  Headphones: ["Bluetooth earbuds", "Wired headset", "Noise cancelling", "Mic headphones"],
+  Bicycles: ["Campus cycle", "Gear cycle", "Lock set", "Air pump"],
+  Furniture: ["Study table", "Office chair", "Bookshelf", "Desk lamp"],
+  Clothes: ["Hoodies", "Jeans", "Shirts", "Jackets", "Kurti", "Track pants"],
+  "Gaming equipment": ["Controller", "Keyboard", "Mousepad", "Gaming headset"],
+  Electronics: ["Power bank", "Router", "Speaker", "Extension board", "Adapter", "SSD"],
+  "Hostel essentials": ["Bucket", "Kettle", "Storage box", "Hanger", "Mirror", "Laundry bag"],
+  Calculators: ["Scientific", "Graphing", "Basic", "Pouch", "Battery", "Cover"],
+  Bags: ["Backpack", "Laptop bag", "Tote", "Messenger bag", "Travel bag", "Sling bag"],
 };
 
 function loadCollection(key) {
@@ -261,21 +262,34 @@ function mountCategorySublistSection() {
         <div class="eyebrow light">Sublist</div>
         <h2>Browse inside ${categoryName}</h2>
       </div>
-      <p>Quick subcategories to help students find exactly what they need.</p>
+      <p>Quick picks to help students find exactly what they need.</p>
     </div>
     <div class="sublist-grid"></div>
   `;
 
   const grid = section.querySelector(".sublist-grid");
   sublists.forEach((label) => {
-    const chip = document.createElement("button");
-    chip.type = "button";
-    chip.className = "sublist-chip";
-    chip.innerHTML = `<span class="sublist-bullet"></span><span>${label}</span>`;
-    chip.addEventListener("click", () => {
-      openCollectionsPanel();
-    });
-    grid.appendChild(chip);
+    const card = document.createElement("article");
+    card.className = "sublist-card";
+
+    const itemData = {
+      title: label,
+      category: categoryName,
+      price: "Add to cart",
+    };
+
+    card.innerHTML = `
+      <div class="sublist-card-top">
+        <span class="sublist-bullet"></span>
+        <div>
+          <h3>${label}</h3>
+          <p>${categoryName}</p>
+        </div>
+      </div>
+    `;
+
+    card.appendChild(buildItemActions(itemData));
+    grid.appendChild(card);
   });
 
   const hero = pageRoot.querySelector(".category-hero");
@@ -323,7 +337,7 @@ function setTheme(theme) {
   const nextTheme = availableThemes.includes(theme) ? theme : "mint";
 
   document.body.dataset.theme = nextTheme;
-  themeButtons.forEach((button) => {
+  document.querySelectorAll(".theme-chip").forEach((button) => {
     button.classList.toggle("active", button.dataset.theme === nextTheme);
   });
 
@@ -331,6 +345,10 @@ function setTheme(theme) {
 }
 
 function renderCategories() {
+  if (!categoryGrid || !categoryTemplate || !categorySelect) {
+    return;
+  }
+
   categories.forEach(([emoji, label]) => {
     const chip = categoryTemplate.content.cloneNode(true);
     chip.querySelector(".emoji").textContent = emoji;
@@ -348,6 +366,10 @@ function renderCategories() {
 }
 
 function renderFeed() {
+  if (!feed || !feedTemplate) {
+    return;
+  }
+
   feed.innerHTML = "";
 
   listings.forEach((listing) => {
@@ -374,13 +396,19 @@ function setMode(mode) {
   });
 }
 
-document.getElementById("postItemBtn").addEventListener("click", () => {
-  listingForm.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+const postItemBtn = document.getElementById("postItemBtn");
+if (postItemBtn && listingForm) {
+  postItemBtn.addEventListener("click", () => {
+    listingForm.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
 
-document.getElementById("viewDemoBtn").addEventListener("click", () => {
-  document.querySelector(".demo-panel").scrollIntoView({ behavior: "smooth", block: "start" });
-});
+const viewDemoBtn = document.getElementById("viewDemoBtn");
+if (viewDemoBtn) {
+  viewDemoBtn.addEventListener("click", () => {
+    document.querySelector(".demo-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
 
 themeButtons.forEach((button) => {
   button.addEventListener("click", () => setTheme(button.dataset.theme));
@@ -390,27 +418,29 @@ modeButtons.forEach((button) => {
   button.addEventListener("click", () => setMode(button.dataset.mode));
 });
 
-listingForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+if (listingForm && categorySelect) {
+  listingForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  const formData = new FormData(listingForm);
-  const title = formData.get("title");
-  const category = formData.get("category");
-  const price = formData.get("price");
+    const formData = new FormData(listingForm);
+    const title = formData.get("title");
+    const category = formData.get("category");
+    const price = formData.get("price");
 
-  listings.unshift({
-    title,
-    category,
-    price,
-    mode: selectedMode.charAt(0).toUpperCase() + selectedMode.slice(1),
-    meta: "Posted just now · Direct student contact",
+    listings.unshift({
+      title,
+      category,
+      price,
+      mode: selectedMode.charAt(0).toUpperCase() + selectedMode.slice(1),
+      meta: "Posted just now · Direct student contact",
+    });
+
+    renderFeed();
+    listingForm.reset();
+    categorySelect.selectedIndex = 0;
+    setMode("sell");
   });
-
-  renderFeed();
-  listingForm.reset();
-  categorySelect.selectedIndex = 0;
-  setMode("sell");
-});
+}
 
 function enhanceStaticCategoryPages() {
   const categoryCards = document.querySelectorAll(".category-page .item-card");
@@ -440,8 +470,10 @@ function enhanceStaticCategoryPages() {
 cartItems = loadCollection("campkart-cart");
 wishlistItems = loadCollection("campkart-wishlist");
 
-renderCategories();
-renderFeed();
+if (isHomePage) {
+  renderCategories();
+  renderFeed();
+}
 setMode("sell");
 setTheme(localStorage.getItem("campkart-theme") || "pink");
 mountThemeToolsSection();

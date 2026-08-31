@@ -368,6 +368,18 @@ button {
   gap: 14px;
 }
 
+.footer {
+  margin-top: 22px;
+  padding: 18px 24px;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--muted);
+}
+
 .feed-item {
   padding: 18px;
   border-radius: 20px;

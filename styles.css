@@ -84,6 +84,32 @@ body[data-theme="bw"] {
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
 }
 
+body[data-theme="bw"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.24;
+  background-color: #f6f6f6;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%23111111' stroke-width='6.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.75'%3E%3Cpath d='M20 24h46c12 0 22 10 22 22v94c-6-6-15-9-24-9H20z'/%3E%3Cpath d='M66 24h30c12 0 22 10 22 22v94c-6-6-15-9-24-9H66z'/%3E%3Cpath d='M128 26h50l11 22-11 21h-50z'/%3E%3Cpath d='M128 69h58l-18 10 18 11h-58z'/%3E%3Cpath d='M194 28h58v58h-58z'/%3E%3Cpath d='M206 42h10m-10 14h10m-10 14h10m14-28h10m-10 14h10m-10 14h10'/%3E%3Cpath d='M24 148h56v56H24z'/%3E%3Cpath d='M38 162h28m-28 14h28m-28 14h28'/%3E%3Cpath d='M116 150h72v56h-72z'/%3E%3Cpath d='M130 164h44m-44 14h44m-44 14h24'/%3E%3Cpath d='M214 146h36c8 0 14 6 14 14v40h-30c-11 0-20-9-20-20z'/%3E%3Cpath d='M214 160h26'/%3E%3Cpath d='M34 234h54c14 0 26 12 26 26H34z'/%3E%3Cpath d='M118 226h48l10 20-10 20h-48z'/%3E%3Cpath d='M194 222h52c12 0 22 10 22 22v22h-30c-24 0-44-20-44-44z'/%3E%3Cpath d='M248 44l18 18m-18 0l18-18'/%3E%3Cpath d='M82 214c0-11 9-20 20-20 10 0 18 7 19 16'/%3E%3Cpath d='M26 104h24'/%3E%3Cpath d='M248 126h18'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 240px 240px;
+  background-repeat: repeat;
+  background-position: center;
+}
+
+body[data-theme="bw"]::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 86px;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0), rgba(17, 17, 17, 0.95));
+}
+
 * {
   box-sizing: border-box;
 }
@@ -102,6 +128,53 @@ body {
     radial-gradient(circle at top right, var(--theme-glow-b), transparent 28%),
     linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
   overflow-x: hidden;
+}
+
+body[data-theme="bw"] {
+  color: #111111;
+}
+
+body[data-theme="bw"] .card,
+body[data-theme="bw"] .feature-showcase,
+body[data-theme="bw"] .demo-panel,
+body[data-theme="bw"] .feed-item,
+body[data-theme="bw"] .category-chip,
+body[data-theme="bw"] .stats div,
+body[data-theme="bw"] .footer,
+body[data-theme="bw"] .newsletter-panel {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(17, 17, 17, 0.16);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.12);
+}
+
+body[data-theme="bw"] .secondary,
+body[data-theme="bw"] .pink-cta,
+body[data-theme="bw"] .theme-chip {
+  background: rgba(255, 255, 255, 0.96);
+  color: #111111;
+  border-color: rgba(17, 17, 17, 0.18);
+}
+
+body[data-theme="bw"] .theme-chip.active,
+body[data-theme="bw"] .primary,
+body[data-theme="bw"] .newsletter-submit {
+  background: linear-gradient(135deg, #111111, #4a4a4a);
+  color: #ffffff;
+}
+
+body[data-theme="bw"] .listing-card,
+body[data-theme="bw"] .flow-step,
+body[data-theme="bw"] .mode-btn,
+body[data-theme="bw"] .newsletter-form,
+body[data-theme="bw"] .stats div {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(17, 17, 17, 0.16);
+}
+
+body[data-theme="bw"] .theme-dot,
+body[data-theme="bw"] .status-dot,
+body[data-theme="bw"] .footer-mark {
+  background: linear-gradient(135deg, #111111, #4a4a4a);
 }
 
 button,

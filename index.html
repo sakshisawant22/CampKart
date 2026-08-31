@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <title>CampKart | Campus Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
+
+  <main class="shell">
+    <section class="hero card">
+      <div class="hero-copy">
+        <div class="eyebrow">Campus marketplace for students</div>
+        <h1>Buy, sell, or rent from people on your own campus.</h1>
+        <p class="lede">
+          CampKart helps college students list books, laptops, hostel essentials, and more,
+          then connect directly for quick deals.
+        </p>
+
+        <div class="cta-row">
+          <button class="primary" id="postItemBtn">Post an item</button>
+          <button class="secondary" id="viewDemoBtn">See a live example</button>
+        </div>
+
+        <div class="stats">
+          <div>
+            <strong>12</strong>
+            <span>listing categories</span>
+          </div>
+          <div>
+            <strong>Buy / Sell</strong>
+            <span>fast student-to-student deals</span>
+          </div>
+          <div>
+            <strong>Rent-ready</strong>
+            <span>for short-term campus needs</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="demo-panel">
+        <div class="demo-header">
+          <span class="status-dot"></span>
+          <span>Featured listing</span>
+        </div>
+        <div class="listing-card">
+          <div class="listing-icon">🧮</div>
+          <div>
+            <h2>Scientific Calculator</h2>
+            <p>Condition: Almost new</p>
+          </div>
+          <div class="price">₹800</div>
+        </div>
+        <div class="flow">
+          <div class="flow-step active">
+            <span>1</span>
+            <p>Student A lists the calculator.</p>
+          </div>
+          <div class="flow-step">
+            <span>2</span>
+            <p>Student B opens the listing and contacts Student A.</p>
+          </div>
+          <div class="flow-step">
+            <span>3</span>
+            <p>They complete the purchase or rental handoff.</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card categories-section">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">What students can list</div>
+          <h2>Built for the everyday campus economy</h2>
+        </div>
+        <p>From academic gear to hostel essentials, every item type is organized for quick browsing.</p>
+      </div>
+
+      <div class="category-grid" id="categoryGrid"></div>
+    </section>
+
+    <section class="split-grid">
+      <article class="card form-card">
+        <div class="section-heading compact">
+          <div>
+            <div class="eyebrow">Post a listing</div>
+            <h2>Share what you want to sell or rent</h2>
+          </div>
+        </div>
+
+        <form id="listingForm" class="listing-form">
+          <label>
+            Item name
+            <input type="text" name="title" placeholder="e.g. Calculus textbook" required>
+          </label>
+          <label>
+            Category
+            <select name="category" id="categorySelect" required></select>
+          </label>
+          <label>
+            Mode
+            <div class="mode-toggle">
+              <button type="button" class="mode-btn active" data-mode="sell">Sell</button>
+              <button type="button" class="mode-btn" data-mode="buy">Buy</button>
+              <button type="button" class="mode-btn" data-mode="rent">Rent</button>
+            </div>
+          </label>
+          <label>
+            Price
+            <input type="text" name="price" value="₹800" required>
+          </label>
+          <button class="primary submit-btn" type="submit">Create listing</button>
+        </form>
+      </article>
+
+      <article class="card feed-card">
+        <div class="section-heading compact">
+          <div>
+            <div class="eyebrow">Marketplace feed</div>
+            <h2>Recent campus listings</h2>
+          </div>
+        </div>
+
+        <div class="feed" id="feed"></div>
+      </article>
+    </section>
+  </main>
+
+  <template id="categoryTemplate">
+    <button class="category-chip" type="button">
+      <span class="emoji"></span>
+      <span class="label"></span>
+    </button>
+  </template>
+
+  <template id="feedTemplate">
+    <article class="feed-item">
+      <div class="feed-top">
+        <div>
+          <h3></h3>
+          <p></p>
+        </div>
+        <strong></strong>
+      </div>
+      <div class="feed-meta"></div>
+      <button class="secondary small contact-btn" type="button">Contact student</button>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -56,6 +56,21 @@ const themeOptions = [
   { theme: "royal", label: "Royal Blue" },
 ];
 
+const sublistData = {
+  "Books & study material": ["Textbooks", "Notes & guides", "Previous papers", "Lab manuals"],
+  "Laptops/accessories": ["Laptop bags", "Chargers", "Mouse & keyboards", "Stands & sleeves"],
+  Monitors: ["Second screens", "HDMI cables", "Monitor stands", "Power adapters"],
+  Headphones: ["Bluetooth headsets", "Wired headphones", "Earbuds", "Mic headsets"],
+  Bicycles: ["Campus cycles", "Locks", "Pumps", "Baskets"],
+  Furniture: ["Study tables", "Chairs", "Shelves", "Desk lamps"],
+  Clothes: ["Hoodies", "Jeans", "Shirts", "Jackets"],
+  "Gaming equipment": ["Controllers", "Keyboards", "Mousepads", "Headsets"],
+  Electronics: ["Power banks", "Routers", "Speakers", "Extension boards"],
+  "Hostel essentials": ["Buckets", "Kettles", "Storage boxes", "Hangers"],
+  Calculators: ["Scientific", "Graphing", "Basic", "Calculator pouches"],
+  Bags: ["Backpacks", "Laptop bags", "Totes", "Messenger bags"],
+};
+
 function loadCollection(key) {
   try {
     return JSON.parse(localStorage.getItem(key) || "[]");
@@ -222,6 +237,51 @@ function mountThemeToolsSection() {
   main.prepend(tools);
 }
 
+function mountCategorySublistSection() {
+  const pageRoot = document.querySelector(".category-page");
+  if (!pageRoot) {
+    return;
+  }
+
+  if (pageRoot.querySelector(".sublist-section")) {
+    return;
+  }
+
+  const categoryName = document.querySelector(".category-hero h1")?.textContent?.trim();
+  const sublists = sublistData[categoryName];
+  if (!categoryName || !sublists) {
+    return;
+  }
+
+  const section = document.createElement("section");
+  section.className = "sublist-section card";
+  section.innerHTML = `
+    <div class="section-heading compact">
+      <div>
+        <div class="eyebrow light">Sublist</div>
+        <h2>Browse inside ${categoryName}</h2>
+      </div>
+      <p>Quick subcategories to help students find exactly what they need.</p>
+    </div>
+    <div class="sublist-grid"></div>
+  `;
+
+  const grid = section.querySelector(".sublist-grid");
+  sublists.forEach((label) => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "sublist-chip";
+    chip.innerHTML = `<span class="sublist-bullet"></span><span>${label}</span>`;
+    chip.addEventListener("click", () => {
+      openCollectionsPanel();
+    });
+    grid.appendChild(chip);
+  });
+
+  const hero = pageRoot.querySelector(".category-hero");
+  hero?.insertAdjacentElement("afterend", section);
+}
+
 function mountSavedDock() {
   if (document.querySelector(".saved-dock")) {
     return;
@@ -386,5 +446,6 @@ setMode("sell");
 setTheme(localStorage.getItem("campkart-theme") || "pink");
 mountThemeToolsSection();
 mountSavedDock();
+mountCategorySublistSection();
 enhanceStaticCategoryPages();
 renderCollectionsPanel();

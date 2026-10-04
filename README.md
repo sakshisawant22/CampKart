@@ -16,6 +16,23 @@ Your live application is actively tunneled and publicly reachable at:
 
 ---
 
+##  App Flow
+
+```mermaid
+flowchart LR
+    A[Student opens CampusKart] --> B[Browse verified listings]
+    B --> C{Need to buy, sell, or swap?}
+    C -->|Buy| D[Request item and meet on campus]
+    C -->|Sell| E[Post listing with verified student details]
+    C -->|Swap| F[Match with compatible student]
+    D --> G[Track request in My CampusKart]
+    E --> H[Marketplace listing visible instantly]
+    F --> I[Approve swap and chat with match]
+    G --> J[Campus trust + ratings]
+    H --> J
+    I --> J
+```
+
 ##  Quick Start (Local Development & Tunnel)
 
 ### Method A: 1-Click Launcher (Windows)

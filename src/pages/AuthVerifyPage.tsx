@@ -59,7 +59,7 @@ export const AuthVerifyPage: React.FC = () => {
     setIsVerified(true);
     setCurrentUser(CURRENT_DEMO_USER);
     triggerCelebration();
-    showToast('Logged in as Verified Demo Student (Madiha Khan)!', 'success');
+    showToast('Logged in as Verified Demo Student (Priyanka)!', 'success');
     navigate('/home');
   };
 
@@ -185,7 +185,7 @@ export const AuthVerifyPage: React.FC = () => {
             <div className="space-y-1">
               <h3 className="text-lg font-black text-brand-dark">Verification Successful! 🎉</h3>
               <p className="text-xs text-brand-muted">
-                Welcome Madiha Khan (CSE • 2nd Year). Redirecting to your CampusKart dashboard...
+                Welcome Priyanka (CSE • 2nd Year). Redirecting to your CampusKart dashboard...
               </p>
             </div>
           </div>

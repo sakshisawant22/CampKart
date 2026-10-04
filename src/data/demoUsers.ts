@@ -2,7 +2,7 @@ import { User } from '../types';
 
 export const CURRENT_DEMO_USER: User = {
   id: 'user-madiha',
-  name: 'Madiha Khan',
+  name: 'Priyanka',
   email: 'madiha.cse@campus.edu.in',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
   department: 'Computer Science & Engineering',

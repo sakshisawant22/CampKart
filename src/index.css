@@ -9,9 +9,16 @@
   }
   
   body {
-    background-color: #FAF7F2;
-    color: #1E293B;
+    background:
+      radial-gradient(circle at top, rgba(255, 215, 180, 0.9), rgba(255, 246, 239, 0.82) 32%, rgba(255, 241, 232, 0.95) 100%),
+      linear-gradient(180deg, #F8F0E9 0%, #FFF7F2 100%);
+    color: #362C2A;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::selection {
+    background: rgba(247, 199, 163, 0.85);
+    color: #6A3321;
   }
 
   /* Custom subtle scrollbar */

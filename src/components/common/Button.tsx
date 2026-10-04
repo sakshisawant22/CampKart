@@ -22,12 +22,12 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles = 'inline-flex items-center justify-center font-medium rounded-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 shadow-sm';
 
   const variants = {
-    primary: 'bg-pastel-sage-dark text-white hover:bg-[#3D5A4D] focus:ring-pastel-sage shadow-soft hover:shadow-soft-lg',
-    secondary: 'bg-pastel-mint text-pastel-mint-dark hover:bg-[#A8DCB8] focus:ring-pastel-mint font-semibold shadow-soft hover:shadow-glow-mint',
+    primary: 'bg-gradient-to-r from-[#F7B46F] via-[#F39B5A] to-[#EA7C4B] text-white hover:brightness-110 focus:ring-[#F2A76B] shadow-soft hover:shadow-soft-lg',
+    secondary: 'bg-[#FDE7DA] text-[#A5532B] hover:bg-[#F9D7BF] focus:ring-[#F7B46F] font-semibold shadow-soft hover:shadow-glow-peach',
     lavender: 'bg-pastel-lavender text-pastel-lavender-dark hover:bg-[#C9B5E0] focus:ring-pastel-lavender font-semibold shadow-soft hover:shadow-glow-lavender',
-    peach: 'bg-pastel-peach text-pastel-peach-dark hover:bg-[#FDBA74] focus:ring-pastel-peach font-semibold shadow-soft hover:shadow-glow-peach',
-    outline: 'bg-white text-brand-dark border border-brand-border hover:bg-pastel-warm hover:border-pastel-sage/50 focus:ring-pastel-sage/40 shadow-none',
-    ghost: 'bg-transparent text-brand-dark hover:bg-pastel-warm/80 focus:ring-pastel-sage/30 shadow-none',
+    peach: 'bg-[#F8C7AE] text-[#8F4B2D] hover:bg-[#F4AF87] focus:ring-[#F7B46F] font-semibold shadow-soft hover:shadow-glow-peach',
+    outline: 'bg-white text-brand-dark border border-[#F4C7A5] hover:bg-[#FFF4EC] hover:border-[#E9A56E] focus:ring-[#F7B46F]/40 shadow-none',
+    ghost: 'bg-transparent text-brand-dark hover:bg-[#FFF4EC] focus:ring-[#F7B46F]/30 shadow-none',
     danger: 'bg-rose-500 text-white hover:bg-rose-600 focus:ring-rose-400',
   };
 

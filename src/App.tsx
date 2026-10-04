@@ -29,7 +29,7 @@ const AppLayout: React.FC = () => {
   const isAuthPage = location.pathname === '/verify';
 
   return (
-    <div className="min-h-screen flex flex-col bg-pastel-warm selection:bg-pastel-mint selection:text-pastel-mint-dark">
+    <div className="min-h-screen flex flex-col bg-pastel-warm selection:bg-pastel-peach selection:text-pastel-peach-dark">
       {/* Top Navigation */}
       <Navbar />
 

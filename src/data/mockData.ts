@@ -187,7 +187,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     listingType: 'Swap',
     swapWishlist: 'Scientific Calculator or CSE Coding Books',
     location: 'Block A',
-    description: 'Madiha Khan listing: Looking to swap my pristine Economics textbook for a scientific calculator (Casio 991EX) or Python/Java algorithms book!',
+    description: 'Priyanka listing: Looking to swap my pristine Economics textbook for a scientific calculator (Casio 991EX) or Python/Java algorithms book!',
     images: [
       'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=600&auto=format&fit=crop&q=80',
     ],

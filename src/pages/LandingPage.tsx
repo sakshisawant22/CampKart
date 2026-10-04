@@ -448,19 +448,19 @@ export const LandingPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Example Profile Card: Madiha Khan */}
+            {/* Example Profile Card: Priyanka */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="w-full max-w-sm bg-gradient-to-br from-white to-pastel-warm p-6 rounded-3xl border border-brand-border shadow-soft-lg space-y-5">
                 
                 <div className="flex items-center gap-4">
                   <img
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
-                    alt="Madiha Khan"
+                    alt="Priyanka"
                     className="w-16 h-16 rounded-3xl object-cover border-2 border-pastel-mint shadow-xs"
                   />
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <h4 className="text-base font-extrabold text-brand-dark">Madiha Khan</h4>
+                      <h4 className="text-base font-extrabold text-brand-dark">Priyanka</h4>
                       <ShieldCheck size={16} className="text-pastel-mint-dark" />
                     </div>
                     <p className="text-xs text-brand-muted">CSE • 2nd Year</p>
